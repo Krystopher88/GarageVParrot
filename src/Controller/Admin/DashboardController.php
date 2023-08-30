@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use App\Entity\BrandVehicle;
 use App\Entity\FuelTypeVehicle;
 use App\Entity\PictureVehicles;
@@ -48,6 +49,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::section('Ressource Humaines');
+        yield MenuItem::linkToCrud('Employés', 'fas fa-users', User::class);
         yield MenuItem::section('Véhicules d\'occasion');
         yield MenuItem::linkToCrud('Véhicules', 'fas fa-list', UsedVehicles::class);
         yield MenuItem::linkToCrud('Photos', 'fas fa-list', PictureVehicles::class);
