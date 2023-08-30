@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Entity\BrandVehicle;
 use App\Entity\FuelTypeVehicle;
+use App\Entity\Messaging;
+use App\Entity\OpeningShedule;
 use App\Entity\PictureVehicles;
 use App\Entity\UsedVehicles;
 use App\Entity\VisitorReview;
@@ -49,10 +51,12 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('Horaire', 'fas fa-list', OpeningShedule::class);
         yield MenuItem::section('Ressource Humaines');
         yield MenuItem::linkToCrud('Employés', 'fas fa-users', User::class);
         yield MenuItem::section('Clientéles');
         yield MenuItem::linkToCrud('Avis', 'fas fa-users', VisitorReview::class);
+        yield MenuItem::linkToCrud('Messagerie', 'fas fa-users', Messaging::class);
         yield MenuItem::section('Véhicules d\'occasion');
         yield MenuItem::linkToCrud('Véhicules', 'fas fa-list', UsedVehicles::class);
         yield MenuItem::linkToCrud('Photos', 'fas fa-list', PictureVehicles::class);
