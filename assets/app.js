@@ -6,4 +6,13 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.scss';
+import "./styles/app.scss";
+
+
+// Menu burger
+$(document).ready(function () {
+  // Activer le menu burger
+  $('.navbar-toggler').on('click', function () {
+    $('.navbar-collapse').toggleClass('show');
+  });
+});
