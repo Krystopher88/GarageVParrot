@@ -1,80 +1,49 @@
-<!-- Footer Start -->
-<div class="row d-flex flex-wrap justify-content-between text-center bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
-	<div class="col-md-4 d-flex flex-column">
-		<h3 class="">Quand nous sommes ouvert</h3>
-		<ul class="nav flex-column">
-			{% for openingShedule in openingShedules %}
-				<li class="nav-item mb-2">
-					<i class="fa-solid fa-clock me-2"></i>
-					{{openingShedule.getDays()}}
-					:
-					{% if openingShedule.getHoursAmOpen() is not null %}
-						{{openingShedule.getHoursAmOpen()|date('H:i')}}
-						-
-						{{openingShedule.getHoursAmClose()|date('H:i')}}
-					{% else %}
-						Fermé
-					{% endif %}
-					{% if openingShedule.getHoursPmOpen() is not null %}
-						{{openingShedule.getHoursPmOpen()|date('H:i')}}
-						-
-						{{openingShedule.getHoursPmClose()|date('H:i')}}
-					{% else %}
-						Fermé
-					{% endif %}
-				</li>
-			{% endfor %}
-		</ul>
-	</div>
-	<div class=" col-md-4 navbar d-flex flex-column justify-content-center">
-		<h3>Liens rapide</h3>
-		<nav class="navbar-nav flex-column text-start">
-			<li class="nav-item">
-				<a href="" class="nav-link text-white">
-					<i class="fa-solid fa-angle-right me-2"></i>Accueil</a>
-			</li>
-			<li class="nav-item">
-				<a href="" class="nav-link text-white">
-					<i class="fa-solid fa-angle-right me-2"></i>Nos véhicules</a>
-			</li>
-			<li class="nav-item">
-				<a href="" class="nav-link text-white">
-					<i class="fa-solid fa-angle-right me-2"></i>Nos services</a>
-			</li>
-			<li class="nav-item">
-				<a href="" class="nav-link text-white">
-					<i class="fa-solid fa-angle-right me-2"></i>Contact</a>
-			</li>
-		</nav>
-	</div>
-	<div class="col-md-4 d-flex flex-column">
-		<h3>Pour nous trouver</h3>
-		<span>
-			<i class="fa-solid fa-location-dot me-2"></i>34 rue Adolphe Coll, 31300 Toulouse</span>
-		<span>
-			<i class="fa-solid fa-phone me-2"></i>0000000000</span>
-		<span>
-			<i class="fa-solid fa-envelope me-2"></i>garagevparrot@vparrot.com</span>
-	</div>
-</div>
-<!-- BottomBar Start -->
-<div class="row bg-dark text-white border-top py-4 px-sm-3 px-md-5">
-	<div class="row">
-		<div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-			<p class="m-0 text-white">©
-				<a href="#">Garage Vincent Parrot</a>. Tous droits réservés.</p>
-		</div>
-		<div class="col-lg-6 text-center text-md-right">
-			<ul class="nav d-inline-flex">
-				<li class="nav-item">
-					<a class="nav-link text-white py-0" href="#">Confidentialité</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white py-0" href="#">Termes</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div>
-<!-- BottomBar End -->
-<!-- Footer End -->
+        <!-- Footer Start -->
+    <div class="row d-flex flex-wrap justify-content-between text-center bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
+        <div class="col-md-4 d-flex flex-column">
+        <h3 class="">Quand nous sommes ouvert</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
+                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
+                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
+                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
+                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
+                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
+            </ul>
+        </div>
+        <div class=" col-md-4 navbar d-flex flex-column">
+            <h3>Liens rapide</h3>
+            <nav class="navbar-nav flex-column text-start">
+                <li class="nav-item"><a href="" class="nav-link text-white"><i class="fa-solid fa-angle-right me-2"></i>Accueil</a></li>
+                <li class="nav-item"><a href="" class="nav-link text-white"><i class="fa-solid fa-angle-right me-2"></i>Nos véhicules</a></li>
+                <li class="nav-item"><a href="" class="nav-link text-white"><i class="fa-solid fa-angle-right me-2"></i>Nos services</a></li>
+                <li class="nav-item"><a href="" class="nav-link text-white"><i class="fa-solid fa-angle-right me-2"></i>Contact</a></li>
+            </nav>
+        </div>
+        <div class="col-md-4 d-flex flex-column">
+            <h3>Pour nous trouver</h3>
+            <span><i class="fa-solid fa-location-dot me-2"></i>34 rue Adolphe Coll, 31300 Toulouse</span>
+            <span><i class="fa-solid fa-phone me-2"></i>0000000000</span>
+            <span><i class="fa-solid fa-envelope me-2"></i>garagevparrot@vparrot.com</span>
+        </div>
+    </div>
+    <!-- BottomBar Start -->
+    <div class="row bg-dark text-white border-top py-4 px-sm-3 px-md-5">
+        <div class="row">
+            <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
+                <p class="m-0 text-white">© <a href="#">Garage Vincent Parrot</a>. Tous droits réservés.</p>
+            </div>
+            <div class="col-lg-6 text-center text-md-right">
+                <ul class="nav d-inline-flex">
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">Confidentialité</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">Termes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <!-- BottomBar End -->
+        <!-- Footer End -->
