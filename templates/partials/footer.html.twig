@@ -3,13 +3,28 @@
         <div class="col-md-4 d-flex flex-column">
         <h3 class="">Quand nous sommes ouvert</h3>
             <ul class="nav flex-column">
-                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
-                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
-                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
-                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
-                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
-                <li class="nav-item mb-2"><i class="fa-solid fa-clock me-2"></i>Jours/Horaires</li>
-            </ul>
+            {% for openingShedule in openingShedules %}
+                <li class="nav-item mb-2">
+                    <i class="fa-solid fa-clock me-2"></i>
+                    {{openingShedule.getDays()}}
+                    :
+                    {% if openingShedule.getHoursAmOpen() is not null %}
+                        {{openingShedule.getHoursAmOpen()|date('H:i')}}
+                        -
+                        {{openingShedule.getHoursAmClose()|date('H:i')}}
+                    {% else %}
+                        Fermé
+                    {% endif %}
+                    {% if openingShedule.getHoursPmOpen() is not null %}
+                        {{openingShedule.getHoursPmOpen()|date('H:i')}}
+                        -
+                        {{openingShedule.getHoursPmClose()|date('H:i')}}
+                    {% else %}
+                        Fermé
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
         </div>
         <div class=" col-md-4 navbar d-flex flex-column">
             <h3>Liens rapide</h3>
