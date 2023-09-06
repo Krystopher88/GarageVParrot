@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+{% include "partials/header.html.twig" %}
 
 	<!-- Jumbotron Start -->
 	<div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 m-2">
@@ -167,5 +168,7 @@
 		<!-- card vehicles end -->
 	</div>
   <!-- card vehicles end -->
-
+{% include "partials/modalContactForm.html.twig" %}
+{% include "partials/footer.html.twig" %}
 {% endblock %}
+
