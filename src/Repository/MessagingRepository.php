@@ -21,6 +21,12 @@ class MessagingRepository extends ServiceEntityRepository
         parent::__construct($registry, Messaging::class);
     }
 
+    public function saveMessage(Messaging $messaging): void
+    {
+        $this->_em->persist($messaging);
+        $this->_em->flush();
+    }
+
 //    /**
 //     * @return Messaging[] Returns an array of Messaging objects
 //     */

@@ -3,23 +3,22 @@
 namespace App\Controller;
 
 use App\Form\ModalContactType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\MessagingRepository;
 use App\Repository\OpeningSheduleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
 class HomeController extends AbstractController
 {
-    private $entityManager;
+    private $messagingRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(MessagingRepository $messagingRepository)
     {
-        $this->entityManager = $entityManager;
+        $this->messagingRepository = $messagingRepository;
     }
-
+        
     #[Route('/', name: 'app_home')]
     public function index(OpeningSheduleRepository $openingSheduleRepository, Request $request): Response
     {
@@ -29,8 +28,10 @@ class HomeController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $this->entityManager->persist($form->getData());
-                $this->entityManager->flush();
+                $messaging = $form->getData();
+                $this->messagingRepository->saveMessage($messaging);
+                $this->addFlash('success', 'Votre message a bien été envoyé');
+                return $this->redirectToRoute('app_home');
             }
         }
 
