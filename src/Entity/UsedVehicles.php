@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
+use App\Entity\OptionsVehicles;
 use App\Entity\PictureVehicles;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UsedVehiclesRepository;
@@ -37,6 +38,14 @@ class UsedVehicles
 
     #[ORM\ManyToOne(inversedBy: 'fuelTypeVehicle')]
     private ?FuelTypeVehicle $fuelTypeVehicle = null;
+
+
+    #[ORM\ManyToOne(inversedBy: 'transmissionVehicle')]
+    private ?TransmissionVehicle $transmissionVehicle = null;
+
+    #[ORM\ManyToMany(targetEntity: OptionsVehicles::class, inversedBy: 'optionsVehicles')]
+    #[ORM\JoinTable(name: 'options_vehicles_used_vehicles')]
+    private Collection $optionsVehicles;
 
     public function __construct()
     {
@@ -146,6 +155,37 @@ class UsedVehicles
     public function setFuelTypeVehicle(?FuelTypeVehicle $fuelTypeVehicle): static
     {
         $this->fuelTypeVehicle = $fuelTypeVehicle;
+
+        return $this;
+    }
+
+
+    public function getTransmissionVehicle(): ?TransmissionVehicle
+    {
+        return $this->transmissionVehicle;
+    }
+
+    public function setTransmissionVehicle(?TransmissionVehicle $transmissionVehicle): static
+    {
+        $this->transmissionVehicle = $transmissionVehicle;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of optionsVehicles
+     */
+    public function getOptionsVehicles(): Collection
+    {
+        return $this->optionsVehicles;
+    }
+
+    /**
+     * Set the value of optionsVehicles
+     */
+    public function setOptionsVehicles(Collection $optionsVehicles): self
+    {
+        $this->optionsVehicles = $optionsVehicles;
 
         return $this;
     }
