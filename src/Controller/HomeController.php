@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\ModalContactType;
 use App\Repository\MessagingRepository;
 use App\Repository\OpeningSheduleRepository;
+use App\Repository\UsedVehiclesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +21,7 @@ class HomeController extends AbstractController
     }
         
     #[Route('/', name: 'app_home')]
-    public function index(OpeningSheduleRepository $openingSheduleRepository, Request $request): Response
+    public function index(OpeningSheduleRepository $openingSheduleRepository, UsedVehiclesRepository $usedVehiclesRepository ,Request $request,): Response
     {
         $form = $this->createForm(ModalContactType::class);
 
@@ -39,6 +40,8 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
             'openingShedules' => $openingSheduleRepository->findAll(),
             'form' => $form->createView(),
+            'usedVehiclesCards' => $usedVehiclesRepository->findCardUsedVehicles(),
         ]);
     }
+
 }

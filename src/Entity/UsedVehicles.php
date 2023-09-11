@@ -9,8 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UsedVehiclesRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UsedVehiclesRepository::class)]
+#[Vich\Uploadable]
 class UsedVehicles
 {
     #[ORM\Id]
@@ -50,6 +52,11 @@ class UsedVehicles
     public function __construct()
     {
         $this->pictureVehicles = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->pictureVehicles;
     }
 
     public function getId(): ?int

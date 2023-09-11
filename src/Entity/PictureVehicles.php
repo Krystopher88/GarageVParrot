@@ -105,4 +105,5 @@ class PictureVehicles
 
         return $this;
     }
+
 }
