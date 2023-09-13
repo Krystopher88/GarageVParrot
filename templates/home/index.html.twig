@@ -4,7 +4,6 @@
 {% endblock %}
 
 {% block body %}
-	{% include "partials/header.html.twig" %}
 
 	<!-- Jumbotron Start -->
 	<div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 m-2">
@@ -82,10 +81,10 @@
             {% if usedVehiclesCard.pictureVehicles|length > 0 %}
                 <img src="{{ asset('uploads/imgVehicles/' ~ usedVehiclesCard.pictureVehicles[randomIndex]) }}" class="card-img-top p-1" alt="...">
             {% else %}
-                <img src="{{ asset('uploads/imgVehicles/default_image.jpg') }}" class="card-img-top" alt="Default Image">
+                <img src="{{ asset('pictures/default-car.png') }}" class="card-img-top p-1" alt="Default Image">
             {% endif %}
             <div class="card-body">
-                <h5 class="card-title">{{ usedVehiclesCard.brandVehicle }} {{ usedVehiclesCard.model }}</h5>
+                <a href="{{ path('app_usedVehicle', {id : usedVehiclesCard.id})}}" class="stretched-link"><h5 class="card-title">{{ usedVehiclesCard.brandVehicle }} {{ usedVehiclesCard.model }}</h5></a>
                 <p class="card-text">
                     <ul class="list-group">
                         <li class="list-group-item">{{ usedVehiclesCard.price }} €</li>
@@ -102,5 +101,4 @@
 	<!-- card vehicles end -->
 </div>
 <!-- card vehicles end -->
-{% include "partials/modalContactForm.html.twig" %}
-{% include "partials/footer.html.twig" %}{% endblock %}
+{% endblock %}

@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
-use App\Form\ModalContactType;
-use App\Repository\MessagingRepository;
-use App\Repository\OpeningSheduleRepository;
+
+use Ap\Entity\UsedVehicles;
+use App\Entity\PictureVehicles;
+use App\Entity\UsedVehicles as EntityUsedVehicles;
+use App\Service\ContactFormService;
 use App\Repository\UsedVehiclesRepository;
+use App\Repository\OpeningSheduleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,35 +16,45 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    private $messagingRepository;
+    private $contactFormService;
 
-    public function __construct(MessagingRepository $messagingRepository)
+    public function __construct(ContactFormService $contactFormService)
     {
-        $this->messagingRepository = $messagingRepository;
+        $this->contactFormService = $contactFormService;
     }
         
-    #[Route('/', name: 'app_home')]
-    public function index(OpeningSheduleRepository $openingSheduleRepository, UsedVehiclesRepository $usedVehiclesRepository ,Request $request,): Response
+    #[Route('/', name: 'app_home', methods: ['GET'])]
+    public function index(OpeningSheduleRepository $openingSheduleRepository, UsedVehiclesRepository $usedVehiclesRepository, Request $request): Response
     {
-        $form = $this->createForm(ModalContactType::class);
-
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $messaging = $form->getData();
-                $this->messagingRepository->saveMessage($messaging);
-                $this->addFlash('success', 'Votre message a bien été envoyé');
-                return $this->redirectToRoute('app_home');
-            }
-        }
+        $formView = $this->contactFormService->handleContactForm($request);
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'openingShedules' => $openingSheduleRepository->findAll(),
-            'form' => $form->createView(),
+            'form' => $formView,
             'usedVehiclesCards' => $usedVehiclesRepository->findCardUsedVehicles(),
         ]);
+
     }
 
+    #[Route('/usedvehicle{id}', name: 'app_usedVehicle', methods: ['GET'])]
+    public function show(UsedVehiclesRepository $usedVehiclesRepository, OpeningSheduleRepository $openingSheduleRepository, Request $request) : Response
+    {
+
+        $formView = $this->contactFormService->handleContactForm($request);
+
+        $id = $request->attributes->get('id');
+        $usedVehicle = $usedVehiclesRepository->findOneBy(['id' => $id]);
+        $picturesVehicles = $usedVehicle->getPictureVehicles();
+        $optionsVehicles = $usedVehicle->getOptionsVehicles();
+
+        return $this->render('home/usedvehicle.html.twig', [
+            'controller_name' => 'HomeController',
+            'form' => $formView,
+            'openingShedules' => $openingSheduleRepository->findAll(),
+            'usedVehicles' => $usedVehicle,
+            'picturesVehicles' => $picturesVehicles,
+            'optionsVehicles' => $optionsVehicles,
+        ]);
+    }
 }
