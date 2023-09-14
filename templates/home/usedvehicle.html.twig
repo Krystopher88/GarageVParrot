@@ -1,20 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Garage Vincent Parrot
+{% block title %}
+	Garage Vincent Parrot
 {% endblock %}
 {% block body %}
 	<div class="card mb-3">
 		<div class="card-header">
 			<ul class="nav nav-tabs card-header-tabs">
 				<li class="nav-item">
-                <a class="nav-link card-nav-link active" aria-current="true" href="#" id="tab_info">Information Véhicule</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="tab_form">Obtenir plus d'informations</a>
-            </li>
+					<a class="nav-link card-nav-link active" aria-current="true" href="#" id="tab_info">
+						Information Véhicule
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#" id="tab_form">
+						Obtenir plus d'informations
+					</a>
+				</li>
 			</ul>
 		</div>
-		<div class="row g-0">
+		<div class="row g-0 align-items-center">
 			<div class="col-md-4 p-3">
 				<div id="carouselIndicators" class="carousel slide">
 
@@ -27,108 +32,169 @@
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
+						<span class="visually-hidden">
+							Previous
+						</span>
 					</button>
 					<button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
 						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
+						<span class="visually-hidden">
+							Next
+						</span>
 					</button>
 				</div>
 			</div>
-			<div class="card-body col-md-8 p-2 d-flex justify-content-around align-items-center" id="card_body_info">
-				<div class="d-flex">
-					<ul class="list-group list-group-flush text-start">
-						<li class="list-group-item">Constructeur</li>
-						<li class="list-group-item">Modéle</li>
-						<li class="list-group-item">Kilométrage</li>
-						<li class="list-group-item">1ere mise en circulation</li>
-						<li class="list-group-item">Energie</li>
-					</ul>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">{{ usedVehicles.brandVehicle }}</li>
-						<li class="list-group-item">{{ usedVehicles.model }}</li>
-						<li class="list-group-item">{{ usedVehicles.mileage }}
-							km</li>
-						<li class="list-group-item">{{ usedVehicles.dateOfCirculation|date('d-m-Y') }}</li>
-						<li class="list-group-item">{{ usedVehicles.fuelTypeVehicle }}</li>
-					</ul>
-				</div>
-				<div>
-								<ul class="text-start">
-					{% for optionsVehicle in optionsVehicles %}
-						<li>{{ optionsVehicle.getName() }}</li>
-					{% endfor %}
-				</ul></div>
-				<div class="align-items-center">
-					<h3>{{ usedVehicles.price }}
-						€</h3>
-					<p>Financement possible auprés de nos partenaires</p>
+			<div class="card-body col-md-8 p-2" id="card_body_info">
+				<div class="card d-flex flex-row align-items-center">
+					<div class="card-body d-flex col-md-2">
+						<ul class="list-group list-group-flush text-start">
+							<li class="list-group-item">
+								Constructeur
+							</li>
+							<li class="list-group-item">
+								Modéle
+							</li>
+							<li class="list-group-item">
+								Kilométrage
+							</li>
+							<li class="list-group-item">
+								1ere mise en circulation
+							</li>
+							<li class="list-group-item">
+								Energie
+							</li>
+						</ul>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								{{ usedVehicles.brandVehicle }}
+							</li>
+							<li class="list-group-item">
+								{{ usedVehicles.model }}
+							</li>
+							<li class="list-group-item">
+								{{ usedVehicles.mileage }}
+								km
+							</li>
+							<li class="list-group-item">
+								{{ usedVehicles.dateOfCirculation|date('d-m-Y') }}
+							</li>
+							<li class="list-group-item">
+								{{ usedVehicles.fuelTypeVehicle }}
+							</li>
+						</ul>
+					</div>
+					<div class="card-body col-md-2">
+						<ul class="text-start">
+							{% for optionsVehicle in optionsVehicles %}
+								<li class="list-group-item">
+									{{ optionsVehicle.getName() }}
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class=" card-body align-items-center col-md-2">
+						<h3>
+							{{ usedVehicles.price }}
+							€
+						</h3>
+						<p>
+							Financement possible auprés de nos partenaires
+						</p>
+					</div>
 				</div>
 			</div>
 			<div class="card-body col-md-8 p-2" id="card_body_form">
 				<div class="row d-flex">
 					<div class="col-md-8 mb-4">
-					  <div class="card mb-4">
-					    <div class="card-header py-3">
-					      <h5 class="mb-0">Formulaire de contact</h5>
-					    </div>
-					    <div class="card-body">
-					      <form>
-					        <!-- 2 column grid layout with text inputs for the first and last names -->
-					        <div class="row mb-4">
-					          <div class="col">
-					            <div class="form-outline">
-					              <input type="text" id="form7Example1" class="form-control" />
-					              <label class="form-label" for="form7Example1">Prénom</label>
-					            </div>
-					          </div>
-					          <div class="col">
-					            <div class="form-outline">
-					              <input type="text" id="form7Example2" class="form-control" />
-					              <label class="form-label" for="form7Example2">Nom</label>
-					            </div>
-					          </div>
-					        </div>
-					        <!-- Email input -->
-					        <div class="form-outline mb-4">
-					          <input type="email" id="form7Example5" class="form-control" />
-					          <label class="form-label" for="form7Example5">Email</label>
-					        </div>
+						<div class="card mb-4">
+							<div class="card-header py-3">
+								<h5 class="mb-0">
+									Formulaire de contact
+								</h5>
+							</div>
+							<div class="card-body">
+								<form>
+									<!-- 2 column grid layout with text inputs for the first and last names -->
+									<div class="row mb-4">
+										<div class="col">
+											<div class="form-outline">
+												<input type="text" id="form7Example1" class="form-control"/>
+												<label class="form-label" for="form7Example1">
+													Prénom
+												</label>
+											</div>
+										</div>
+										<div class="col">
+											<div class="form-outline">
+												<input type="text" id="form7Example2" class="form-control"/>
+												<label class="form-label" for="form7Example2">
+													Nom
+												</label>
+											</div>
+										</div>
+									</div>
+									<!-- Email input -->
+									<div class="form-outline mb-4">
+										<input type="email" id="form7Example5" class="form-control"/>
+										<label class="form-label" for="form7Example5">
+											Email
+										</label>
+									</div>
 
-					        <!-- Number input -->
-					        <div class="form-outline mb-4">
-					          <input type="tel" id="form7Example6" class="form-control" />
-					          <label class="form-label" for="form7Example6">Téléphone</label>
-					        </div>
-					      </form>
-					    </div>
-					  </div>
+									<!-- Number input -->
+									<div class="form-outline mb-4">
+										<input type="tel" id="form7Example6" class="form-control"/>
+										<label class="form-label" for="form7Example6">
+											Téléphone
+										</label>
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
 
 					<div class="col-md-4 mb-4">
-					  <div class="card mb-4">
-					    <div class="card-header py-3">
-					      <h5 class="mb-0">Véhicule concerné</h5>
-					    </div>
-					    <div class="card-body">
-					      <ul class="list-group list-group-flush">
-									<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">{{ usedVehicles.brandVehicle }} {{ usedVehicles.model }}</li>
-									<li class="list-group-item d-flex justify-content-between align-items-center px-0">{{ usedVehicles.mileage }} km</li>
-									<li class="list-group-item d-flex justify-content-between align-items-center px-0">{{ usedVehicles.dateOfCirculation|date('d-m-Y') }}</li>
-									<li class="list-group-item d-flex justify-content-between align-items-center px-0">{{ usedVehicles.fuelTypeVehicle }}</li>
-									<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">{{ usedVehicles.price }} €</li>
+						<div class="card mb-4">
+							<div class="card-header py-3">
+								<h5 class="mb-0">
+									Véhicule concerné
+								</h5>
+							</div>
+							<div class="card-body">
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+										{{ usedVehicles.brandVehicle }}
+										{{ usedVehicles.model }}
+										<input type="hidden" name="brandVehicle" value="{{ usedVehicles.brandVehicle }}">
+										<input type="hidden" name="model" value="{{ usedVehicles.model }}">
+									</li>
+									<li class="list-group-item d-flex justify-content-between align-items-center px-0">
+										{{ usedVehicles.mileage }}
+										km
+										<input type="hidden" name="mileage" value="{{ usedVehicles.mileage }}">
+									</li>
+									<li class="list-group-item d-flex justify-content-between align-items-center px-0">
+										{{ usedVehicles.dateOfCirculation|date('d-m-Y') }}
+										<input type="hidden" name="dateOfCirculation" value="{{ usedVehicles.dateOfCirculation|date('d-m-Y') }}">
+									</li>
+									<li class="list-group-item d-flex justify-content-between align-items-center px-0">
+										{{ usedVehicles.fuelTypeVehicle }}
+										<input type="hidden" name="fuelTypeVehicle" value="{{ usedVehicles.fuelTypeVehicle }}">
+									</li>
+									<li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+										{{ usedVehicles.price }}
+										€
+										<input type="hidden" name="price" value="{{ usedVehicles.price }}">
+									</li>
+								</ul>
 
-
-					      </ul>
-
-					      <button type="button" class="btn btn-primary btn-lg btn-block">
-					        Envoyer
-					      </button>
-					    </div>
-					  </div>
+								<button type="button" class="btn btn-primary btn-lg btn-block">
+									Envoyer
+								</button>
+							</div>
+						</div>
 					</div>
-				<div>
+					<div></div>
+				</div>
 			</div>
-		</div>
-	</div>
-{% endblock %}
+		{% endblock %}

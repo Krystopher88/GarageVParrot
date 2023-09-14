@@ -57,4 +57,17 @@ class HomeController extends AbstractController
             'optionsVehicles' => $optionsVehicles,
         ]);
     }
+
+    #[Route('/usedvehicles', name: 'app_usedVehicles', methods: ['GET'])]
+    public function usedVehicles(UsedVehiclesRepository $usedVehiclesRepository, OpeningSheduleRepository $openingSheduleRepository, Request $request) : Response
+    {
+        $formView = $this->contactFormService->handleContactForm($request);
+
+        return $this->render('home/usedvehicles.html.twig', [
+            'controller_name' => 'HomeController',
+            'form' => $formView,
+            'openingShedules' => $openingSheduleRepository->findAll(),
+            'usedVehicles' => $usedVehiclesRepository->findAll(),
+        ]);
+    }
 }
