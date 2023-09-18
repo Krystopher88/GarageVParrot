@@ -13,12 +13,9 @@ import "./styles/app.scss";
 require("bootstrap");
 require("bootstrap/js/dist/util");
 require("bootstrap/js/dist/tooltip");
-require("bootstrap/js/dist/popover");
 const $ = require("jquery");
 
-$(function () {
-  $('[data-toggle="popover"]').popover();
-});
+
 
 // Menu burger
 $(function () {
@@ -49,3 +46,6 @@ $(function () {
     $("#card_body_info").addClass("d-none");
   });
 });
+//---------------------------------
+//Range slider
+

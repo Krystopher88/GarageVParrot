@@ -2,10 +2,7 @@
 
 namespace App\Controller;
 
-
-use Ap\Entity\UsedVehicles;
-use App\Entity\PictureVehicles;
-use App\Entity\UsedVehicles as EntityUsedVehicles;
+use App\Service\FilterUsedVehiclesFormService;
 use App\Service\ContactFormService;
 use App\Repository\UsedVehiclesRepository;
 use App\Repository\OpeningSheduleRepository;
@@ -22,7 +19,7 @@ class HomeController extends AbstractController
     {
         $this->contactFormService = $contactFormService;
     }
-        
+
     #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(OpeningSheduleRepository $openingSheduleRepository, UsedVehiclesRepository $usedVehiclesRepository, Request $request): Response
     {
@@ -34,11 +31,10 @@ class HomeController extends AbstractController
             'form' => $formView,
             'usedVehiclesCards' => $usedVehiclesRepository->findCardUsedVehicles(),
         ]);
-
     }
 
-    #[Route('/usedvehicle{id}', name: 'app_usedVehicle', methods: ['GET'])]
-    public function show(UsedVehiclesRepository $usedVehiclesRepository, OpeningSheduleRepository $openingSheduleRepository, Request $request) : Response
+    #[Route('/usedvehicle/{id}', name: 'app_usedVehicle', methods: ['GET'])]
+    public function show(UsedVehiclesRepository $usedVehiclesRepository, OpeningSheduleRepository $openingSheduleRepository, Request $request): Response
     {
 
         $formView = $this->contactFormService->handleContactForm($request);
@@ -59,15 +55,15 @@ class HomeController extends AbstractController
     }
 
     #[Route('/usedvehicles', name: 'app_usedVehicles', methods: ['GET'])]
-    public function usedVehicles(UsedVehiclesRepository $usedVehiclesRepository, OpeningSheduleRepository $openingSheduleRepository, Request $request) : Response
-    {
-        $formView = $this->contactFormService->handleContactForm($request);
+    public function usedVehicles(
+        UsedVehiclesRepository $usedVehiclesRepository,
+        OpeningSheduleRepository $openingSheduleRepository,
+        Request $request
+    ): Response {
+        $formView = $this->contactFormService->handleContactForm($request);        
 
         return $this->render('home/usedvehicles.html.twig', [
-            'controller_name' => 'HomeController',
-            'form' => $formView,
-            'openingShedules' => $openingSheduleRepository->findAll(),
-            'usedVehicles' => $usedVehiclesRepository->findAll(),
+
         ]);
     }
 }
