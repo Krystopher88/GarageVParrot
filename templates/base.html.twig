@@ -18,10 +18,15 @@
 		{% endblock %}
 	</head>
 	<body class="container-fluid d-flex flex-column min-vh-100 justify-content-between text-center">
+
+	{% if app.request.attributes.get('_route') != 'app_login' %}
 		{% include "partials/header.html.twig" %}
+	{% endif %}
 
 		{% block body %}{% endblock %}
+	{% if app.request.attributes.get('_route') != 'app_login' %}
 		{% include "partials/modalContactForm.html.twig" %}
 		{% include "partials/footer.html.twig" %}
+	{% endif %}
 	</body>
 </html>

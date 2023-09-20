@@ -30,19 +30,4 @@ class UsedVehiclesRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
-    public function findUsedVehiclesByFilter($filterData)
-    {
-        $qb =$this->createQueryBuilder('uv');
-        if($filterData['brandVehicle'] != null){
-            $qb->andWhere('uv.brandVehicle = :brandVehicle')
-                ->setParameter('brandVehicle', $filterData['brandVehicle']);
-        }
-        if($filterData['fuelTypeVehicle'] != null){
-            $qb->andWhere('uv.fuelTypeVehicle = :fuelTypeVehicle')
-                ->setParameter('fuelTypeVehicle', $filterData['fuelTypeVehicle']);
-        }
-
-        return $qb->getQuery()->getResult();
-    }
 }

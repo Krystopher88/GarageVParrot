@@ -28,13 +28,17 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'openingShedules' => $openingSheduleRepository->findAll(),
-            'form' => $formView,
+            'formView' => $formView,
             'usedVehiclesCards' => $usedVehiclesRepository->findCardUsedVehicles(),
         ]);
     }
 
     #[Route('/usedvehicle/{id}', name: 'app_usedVehicle', methods: ['GET'])]
-    public function show(UsedVehiclesRepository $usedVehiclesRepository, OpeningSheduleRepository $openingSheduleRepository, Request $request): Response
+    public function show(
+        UsedVehiclesRepository $usedVehiclesRepository, 
+        OpeningSheduleRepository $openingSheduleRepository, 
+        Request $request
+        ): Response
     {
 
         $formView = $this->contactFormService->handleContactForm($request);
@@ -46,7 +50,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/usedvehicle.html.twig', [
             'controller_name' => 'HomeController',
-            'form' => $formView,
+            'formView' => $formView,
             'openingShedules' => $openingSheduleRepository->findAll(),
             'usedVehicles' => $usedVehicle,
             'picturesVehicles' => $picturesVehicles,
@@ -55,15 +59,21 @@ class HomeController extends AbstractController
     }
 
     #[Route('/usedvehicles', name: 'app_usedVehicles', methods: ['GET'])]
-    public function usedVehicles(
-        UsedVehiclesRepository $usedVehiclesRepository,
-        OpeningSheduleRepository $openingSheduleRepository,
+    public function showAllVehicles(
+        UsedVehiclesRepository $usedVehiclesRepository, 
+        OpeningSheduleRepository $openingSheduleRepository, 
         Request $request
-    ): Response {
-        $formView = $this->contactFormService->handleContactForm($request);        
+        ): Response
+    {
+        $formView = $this->contactFormService->handleContactForm($request);
+
+        $usedVehicles = $usedVehiclesRepository->findAll();
 
         return $this->render('home/usedvehicles.html.twig', [
-
+            'controller_name' => 'HomeController',
+            'formView' => $formView,
+            'openingShedules' => $openingSheduleRepository->findAll(),
+            'usedVehicles' => $usedVehicles,
         ]);
     }
 }

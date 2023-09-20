@@ -4,6 +4,33 @@
 	Garage Vincent Parrot
 {% endblock %}
 {% block body %}
-
+	<div class="row p-4">
+		<div class="col-md-2 g-4">
+			{% include "partials/formFilterUsedVehicle.html.twig" %}
+		</div>
+		<div class="row col-md-10 g-4  flex-wrap">
+{% for usedVehiclesCard in usedVehiclesCards %}
+    <div class="col d-flex justify-content-center">
+        <div class="card" style="width: 20rem">
+            {% set randomIndex = random(0, usedVehiclesCard.pictureVehicles|length - 1) %}
+            {% if usedVehiclesCard.pictureVehicles|length > 0 %}
+                <img src="{{ asset('uploads/imgVehicles/' ~ usedVehiclesCard.pictureVehicles[randomIndex]) }}" class="card-img-top p-1" alt="...">
+            {% else %}
+                <img src="{{ asset('pictures/default-car.png') }}" class="card-img-top p-1" alt="Default Image">
+            {% endif %}
+            <div class="card-body">
+                <a href="{{ path('app_usedVehicle', {id : usedVehiclesCard.id})}}" class="stretched-link"><h5 class="card-title">{{ usedVehiclesCard.brandVehicle }} {{ usedVehiclesCard.model }}</h5></a>
+                <p class="card-text">
+                    <ul class="list-group">
+                        <li class="list-group-item">{{ usedVehiclesCard.price }} €</li>
+                        <li class="list-group-item">{{ usedVehiclesCard.mileage }} km</li>
+                        <li class="list-group-item">{{ usedVehiclesCard.transmissionVehicle }}</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+		</div>
+	</div>
 {% endblock %}
-symfony 
