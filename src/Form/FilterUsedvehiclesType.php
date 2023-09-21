@@ -12,9 +12,18 @@ class FilterUsedvehiclesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('brandVehicle')
-            ->add('fuelTypeVehicle')
-            ->add('transmissionVehicle')
+            ->add('brandVehicle', null, [
+                'label' => 'Marque',
+                'placeholder' => 'Choissisez une marque',
+            ])
+            ->add('fuelTypeVehicle', null, [
+                'label' => 'Carburant',
+                'placeholder' => 'Choissisez un type de carburant',
+            ])
+            ->add('transmissionVehicle' , null, [
+                'label' => 'Transmission',
+                'placeholder' => 'Choissisez une transmission',
+            ])
         ;
     }
 
