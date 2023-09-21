@@ -1,50 +1,63 @@
-        <!-- Header Start -->
-        <!-- TopBar start -->
-            <div class="">
-                <div class="row py-2 px-lg-5 bg-dark">
-                    <div class="col-lg-6 text-center text-lg-start mb-2 mb-lg-0">
-                        <div class="d-inline-flex align-items-center text-white">
-                            <small><i class="fa fa-phone px-2"></i>00 00 00 00 00</small>
-                            <small class="px-3">|</small>
-                            <small><i class="fa fa-envelope px-2"></i>garagevparrot@vparrot.com</small>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 text-center text-lg-end">
-                        <div class="d-inline-flex align-items-center">
-                            <a href="" class="text-white px-2">
-                                <i class="fa-brands fa-facebook"></i>
-                            </a>
-                            <a href="" class="text-white px-2">
-                                <i class="fa-brands fa-twitter"></i>
-                            </a>
-                            <a href="" class="text-white px-2">
-                                <i class="fa-brands fa-instagram"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-        <!-- TopBar end -->
-        <!-- NavBar Start -->
-                <nav class="navbar navbar-expand-lg bg-transparent navbar-light py-3 px-3 py-lg-0 px-lg-5 border-bottom">
-                    <a href="" class="navbar-brand ml-lg-3">
-                        <h1 class="m-0 text-uppercase text-primary">
-                            <img src="/pictures/logo_header.png" alt="Garage Vincent Parrot" width="150px">
-                        </h1>
-                    </a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
-                        <div class="navbar-nav m-auto py-0">
-                            <a href="" class="nav-item nav-link active">Accueil</a>
-                            <a href="" class="nav-item nav-link">Nos véhicules</a>
-                            <a href="" class="nav-item nav-link">Nos services</a>
-                            <a href="" class="nav-item nav-link">Contact</a>
-                        </div>
-                        <a href="#" class="btn btn-primary py-2 px-4 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#modalContactForm">Contact</a>
-
-                    </div>
-                </nav> 
-            </div>
-        <!-- NavBar End -->
-        <!-- Header End --> 
+<!-- Header Start -->
+<!-- TopBar start -->
+	<div class=""> <div class="row py-2 px-lg-5 bg-dark">
+		<div class="col-lg-6 text-center text-lg-start mb-2 mb-lg-0">
+			<div class="d-inline-flex align-items-center text-white">
+				<small>
+					<i class="fa fa-phone px-2"></i>
+					00 00 00 00 00
+				</small>
+				<small class="px-3">
+					|
+				</small>
+				<small>
+					<i class="fa fa-envelope px-2"></i>
+					garagevparrot@vparrot.com
+				</small>
+			</div>
+		</div>
+		<div class="col-lg-6 text-center text-lg-end">
+			<div class="d-inline-flex align-items-center">
+				<a href="" class="text-white px-2">
+					<i class="fa-brands fa-facebook"></i>
+				</a>
+				<a href="" class="text-white px-2">
+					<i class="fa-brands fa-twitter"></i>
+				</a>
+				<a href="" class="text-white px-2">
+					<i class="fa-brands fa-instagram"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- TopBar end -->
+	<!-- NavBar Start -->
+	<nav class="navbar navbar-expand-lg bg-transparent navbar-light py-3 px-3 py-lg-0 px-lg-5 border-bottom">
+		<a href="" class="navbar-brand ml-lg-3">
+			<h1 class="m-0 text-uppercase text-primary">
+				<img src="/pictures/logo_header.png" alt="Garage Vincent Parrot" width="150px">
+			</h1>
+		</a>
+		<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+			<div class="navbar-nav m-auto py-0">
+				<a href="{{ path('app_home') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_home' %} active{% endif %}">
+					Accueil
+				</a>
+				<a href="{{ path('app_usedVehicles') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_usedVehicles' %} active{% endif %}">
+					Nos véhicules
+				</a>
+				{# <a href="{{ path('app_services') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_services' %} active{% endif %}">
+					Nos services
+				</a> #}
+			</div>
+			<a href="#" class="btn btn-primary py-2 px-4 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#modalContactForm">
+				Contact
+			</a>
+		</div>
+	</nav>
+</div>
+<!-- NavBar End -->
+<!-- Header End -->

@@ -30,4 +30,30 @@ class UsedVehiclesRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return UsedVehicles[]
+     */
+    public function findSearchVehicles(array $search) : array
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+
+        if($search['brandVehicle']) {
+            $queryBuilder
+                ->andWhere('u.brandVehicle = :brandVehicle')
+                ->setParameter('brandVehicle', $search['brandVehicle']);
+        }
+        if($search['fuelTypeVehicle']) {
+            $queryBuilder
+                ->andWhere('u.fuelTypeVehicle = :fuelTypeVehicle')
+                ->setParameter('fuelTypeVehicle', $search['fuelTypeVehicle']);
+        }
+        if($search['transmissionVehicle']){
+            $queryBuilder
+            ->andWhere('u.transmissionVehicle = :transmissionVehicle')
+            ->setParameter('transmissionVehicle', $search['transmissionVehicle']);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

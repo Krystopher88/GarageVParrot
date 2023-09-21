@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Service\FilterUsedVehiclesFormService;
+
 use App\Service\ContactFormService;
+use App\Form\FilterUsedvehiclesType;
 use App\Repository\UsedVehiclesRepository;
 use App\Repository\OpeningSheduleRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,17 +64,36 @@ class HomeController extends AbstractController
         UsedVehiclesRepository $usedVehiclesRepository, 
         OpeningSheduleRepository $openingSheduleRepository, 
         Request $request
-        ): Response
+    ): Response
     {
         $formView = $this->contactFormService->handleContactForm($request);
 
-        $usedVehicles = $usedVehiclesRepository->findAll();
-
+        // Crée le formulaire de recherche
+        $formFilterVehicles = $this->createForm(FilterUsedvehiclesType::class);
+        $formFilterVehicles->handleRequest($request);
+    
+        if ($formFilterVehicles->isSubmitted() && $formFilterVehicles->isValid()) {
+            // Récupère les données du formulaire en utilisant les noms des champs comme clés
+            $searchData['brandVehicle'] = $formFilterVehicles->get('brandVehicle')->getData();
+            $searchData['fuelTypeVehicle'] = $formFilterVehicles->get('fuelTypeVehicle')->getData();
+            $searchData['transmissionVehicle'] = $formFilterVehicles->get('transmissionVehicle')->getData();
+    
+            // Utilise la méthode de recherche personnalisée du repository pour filtrer les véhicules
+            $usedVehiclesCards = $usedVehiclesRepository->findSearchVehicles($searchData);
+        } else {
+            // Si le formulaire n'a pas été soumis ou si aucun critère de recherche n'a été sélectionné, affiche tous les véhicules
+            $usedVehiclesCards = $usedVehiclesRepository->findAll();
+        }
+    
+        // Gère le formulaire $formView ici en utilisant le service approprié ou la logique
+        // ...
+    
         return $this->render('home/usedvehicles.html.twig', [
             'controller_name' => 'HomeController',
-            'formView' => $formView,
+            'formFilterVehicles' => $formFilterVehicles->createView(),
+            'formView' => $formView, // Assurez-vous de gérer $formView correctement ici
             'openingShedules' => $openingSheduleRepository->findAll(),
-            'usedVehicles' => $usedVehicles,
+            'usedVehiclesCards' => $usedVehiclesCards, // Assurez-vous que le nom de la variable correspond à votre modèle Twig
         ]);
     }
 }

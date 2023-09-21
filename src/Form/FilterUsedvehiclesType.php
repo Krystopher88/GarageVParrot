@@ -22,6 +22,8 @@ class FilterUsedvehiclesType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => UsedVehicles::class,
+            'method' => 'GET',
+            'crsf_protection' => false
         ]);
     }
 }
