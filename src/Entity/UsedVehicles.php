@@ -54,10 +54,10 @@ class UsedVehicles
         $this->pictureVehicles = new ArrayCollection();
     }
 
-    public function __toString()
-    {
-        return $this->pictureVehicles;
-    }
+    // public function __toString()
+    // {
+    //     return $this->pictureVehicles;
+    // }
 
     public function getId(): ?int
     {

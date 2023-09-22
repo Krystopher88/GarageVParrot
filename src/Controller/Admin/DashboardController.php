@@ -3,13 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Services;
 use App\Entity\Messaging;
 use App\Entity\BrandVehicle;
 use App\Entity\UsedVehicles;
 use App\Entity\VisitorReview;
 use App\Entity\OpeningShedule;
+use App\Entity\TypeOfServices;
 use App\Entity\FuelTypeVehicle;
 use App\Entity\OptionsVehicles;
+use App\Entity\PictureVehicles;
 use App\Entity\TransmissionVehicle;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,6 +40,8 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Horaire', 'fas fa-list', OpeningShedule::class);
+        yield MenuItem::linkToCrud('Type de services', 'fas fa-list', TypeOfServices::class);
+        yield MenuItem::linkToCrud(('Services'), 'fas fa-list', Services::class);
         yield MenuItem::section('Ressource Humaines');
         yield MenuItem::linkToCrud('Employés', 'fas fa-users', User::class);
         yield MenuItem::section('Clientéles');

@@ -7,6 +7,9 @@ use App\Service\ContactFormService;
 use App\Form\FilterUsedvehiclesType;
 use App\Repository\UsedVehiclesRepository;
 use App\Repository\OpeningSheduleRepository;
+use App\Repository\ServicesRepository;
+use App\Repository\TypeOfServicesRepository;
+use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,12 +25,18 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_home', methods: ['GET'])]
-    public function index(OpeningSheduleRepository $openingSheduleRepository, UsedVehiclesRepository $usedVehiclesRepository, Request $request): Response
+    public function index(
+        OpeningSheduleRepository $openingSheduleRepository,
+        UsedVehiclesRepository $usedVehiclesRepository,
+        TypeOfServicesRepository $typeOfServicesRepository,
+        Request $request,
+        ): Response
     {
         $formView = $this->contactFormService->handleContactForm($request);
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'typeOfServices' => $typeOfServicesRepository->findAll(),
             'openingShedules' => $openingSheduleRepository->findAll(),
             'formView' => $formView,
             'usedVehiclesCards' => $usedVehiclesRepository->findCardUsedVehicles(),
@@ -94,6 +103,40 @@ class HomeController extends AbstractController
             'formView' => $formView, // Assurez-vous de gérer $formView correctement ici
             'openingShedules' => $openingSheduleRepository->findAll(),
             'usedVehiclesCards' => $usedVehiclesCards, // Assurez-vous que le nom de la variable correspond à votre modèle Twig
+        ]);
+    }
+
+    #[Route('/mecanique', name: 'app_mecanique', methods: ['GET'])]
+    public function mecanique(
+        OpeningSheduleRepository $openingSheduleRepository,
+        ServicesRepository $servicesRepository,
+        Request $request
+        ): Response
+    {
+        $formView = $this->contactFormService->handleContactForm($request);
+
+        return $this->render('home/mecanique.html.twig', [
+            'controller_name' => 'HomeController',
+            'formView' => $formView,
+            'openingShedules' => $openingSheduleRepository->findAll(),
+            'services' => $servicesRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/carrosserie', name: 'app_carrosserie', methods: ['GET'])]
+    public function carrosserie(
+        OpeningSheduleRepository $openingSheduleRepository,
+        ServicesRepository $servicesRepository,
+        Request $request
+        ): Response
+    {
+        $formView = $this->contactFormService->handleContactForm($request);
+
+        return $this->render('home/carrosserie.html.twig', [
+            'controller_name' => 'HomeController',
+            'formView' => $formView,
+            'openingShedules' => $openingSheduleRepository->findAll(),
+            'services' => $servicesRepository->findAll(),
         ]);
     }
 }

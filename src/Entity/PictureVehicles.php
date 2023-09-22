@@ -25,7 +25,7 @@ class PictureVehicles
     #[ORM\Column(nullable: true)]
     private ?int $size = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true)] 
     private ?\DateTimeImmutable $updateAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'pictureVehicles')]

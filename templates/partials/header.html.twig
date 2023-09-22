@@ -49,9 +49,12 @@
 				<a href="{{ path('app_usedVehicles') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_usedVehicles' %} active{% endif %}">
 					Nos véhicules
 				</a>
-				{# <a href="{{ path('app_services') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_services' %} active{% endif %}">
-					Nos services
-				</a> #}
+				<a href="{{ path('app_mecanique') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_mecanique' %} active{% endif %}">
+					Mécanique
+				</a>
+				<a href="{{ path('app_carrosserie') }}" class="nav-item nav-link{% if app.request.attributes.get('_route') == 'app_carrosserie' %} active{% endif %}">
+					Carrosserie
+				</a>
 			</div>
 			<a href="#" class="btn btn-primary py-2 px-4 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#modalContactForm">
 				Contact

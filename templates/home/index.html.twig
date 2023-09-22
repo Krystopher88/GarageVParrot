@@ -1,21 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Garage Vincent Parrot
+{% block title %}
+	Garage Vincent Parrot
 {% endblock %}
 
 {% block body %}
 
 	<!-- Jumbotron Start -->
-	
+
 	<div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 m-2">
 		<div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-			<h1 class="display-4 fw-bold lh-1 text-body-emphasis">Garage Vincent Parrot - Votre Destination Automobile à Toulouse</h1>
-			<p class="lead">Le Garage Vincent Parrot incarne l'excellence dans le monde automobile à Toulouse. 
-																												        Depuis notre ouverture, nous avons su nous démarquer en tant que référence en matière de services automobiles 
-																												        de haute qualité. Situé au cœur de la ville, notre garage est devenu un lieu de confiance pour les passionnés 
-																												        d'automobiles et les conducteurs soucieux de l'entretien de leurs véhicules.</p>
+			<h1 class="display-4 fw-bold lh-1 text-body-emphasis">
+				Garage Vincent Parrot - Votre Destination Automobile à Toulouse
+			</h1>
+			<p class="lead">
+				Le Garage Vincent Parrot incarne l'excellence dans le monde automobile à Toulouse. 
+								Depuis notre ouverture, nous avons su nous démarquer en tant que référence en matière de services automobiles 
+								de haute qualité. Situé au cœur de la ville, notre garage est devenu un lieu de confiance pour les passionnés 
+								d'automobiles et les conducteurs soucieux de l'entretien de leurs véhicules.
+			</p>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-				<button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Contactez-nous</button>
+				<button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">
+					Contactez-nous
+				</button>
 			</div>
 		</div>
 		<div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
@@ -25,81 +32,91 @@
 	<!-- Jumbotron End -->
 	<!-- cards services Start -->
 	<div class="row mb-2">
-		<div class="col-md-6">
-			<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-				<div class="col p-4 d-flex flex-column position-static">
-					<h3 class="mb-0">Mécanique</h3>
-					<p class="card-text mb-auto">Bienvenue au Garage V. Parrot, votre partenaire de confiance 
-																										            en mécanique automobile. Avec 15 ans d'expérience, nous offrons des services de réparation mécanique 
-																										            de qualité et personnalisés pour garantir la sécurité de votre véhicule. Faites-nous confiance pour 
-																										            prendre soin de votre voiture avec expertise.</p>
-					<div class="text-start">
-						<a href="#" class="gap-1 stretched-link btn btn-primary">
-							En savoir plus
-						</a>
-					</div>
-				</div>
-				<div class="col-auto d-none d-lg-block">
-					<svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveaspectratio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title>
-						<rect width="100%" height="100%" fill="#55595c"></rect>
-						<text x="50%" y="50%" fill="#eceeef" dy=".3em"></text>
-					</svg>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-				<div class="col-auto d-none d-lg-block">
-					<svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveaspectratio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title>
-						<rect width="100%" height="100%" fill="#55595c"></rect>
-						<text x="50%" y="50%" fill="#eceeef" dy=".3em"></text>
-					</svg>
-				</div>
-				<div class="col p-4 d-flex flex-column position-static">
-					<h3 class="mb-0">Carrosserie</h3>
-					<p class="mb-auto">Bienvenue au Garage V. Parrot, votre partenaire de confiance en carrosserie automobile. 
-																										            Avec 15 ans d'expérience, nous offrons des services de carrosserie de qualité pour préserver la performance 
-																										            et la sécurité de votre véhicule. Faites-nous confiance pour prendre soin de votre voiture avec expertise
-																										            .This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-					<div class="text-end">
-						<a href="#" class="gap-1 icon-link-hover stretched-link btn btn-primary">
-							En savoir plus
-						</a>
-					</div>
+		{% for typeOfService in typeOfServices %}
+			<div class="col-md-6">
+				<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+					{% if loop.index is even %}
+						{# Ordre d'affichage pour les cartes d'index pair #}
+						<div class="col p-4 d-flex flex-column position-static">
+							<h3 class="mb-0">
+								{{ typeOfService.title }}
+							</h3>
+							<p class="card-text mb-auto">
+								{{ typeOfService.description }}
+							</p>
+							<div class="text-start">
+								<a href="#" class="gap-1 stretched-link btn btn-primary">
+									En savoir plus
+								</a>
+							</div>
+						</div>
+						<div class="col-auto d-none d-lg-block">
+							<img src="{{ asset('uploads/typeOfServices/' ~ typeOfService.imageName) }}" alt="" width="350" height="320" class="img-fluid">
+						</div>
+					{% else %}
+						{# Ordre d'affichage pour les cartes d'index impair #}
+						<div class="col-auto d-none d-lg-block">
+							<img src="{{ asset('uploads/typeOfServices/' ~ typeOfService.imageName) }}" alt="" width="350" height="320" class="img-fluid">
+						</div>
+						<div class="col p-4 d-flex flex-column position-static">
+							<h3 class="mb-0">
+								{{ typeOfService.title }}
+							</h3>
+							<p class="mb-auto">
+								{{ typeOfService.description }}
+							</p>
+							<div class="text-end">
+								<a href="#" class="gap-1 icon-link-hover stretched-link btn btn-primary">
+									En savoir plus
+								</a>
+							</div>
+						</div>
+					{% endif %}
 				</div>
 			</div>
-		</div>
-	</div>
-	<!-- cards services end -->
-	<!-- cards vehicles start (6 max) -->
-	<div class="row row-col-1 row-col-md-6 g-4">
-{% for usedVehiclesCard in usedVehiclesCards %}
-    <div class="col d-flex justify-content-center">
-        <div class="card" style="width: 16rem">
-            {% set randomIndex = random(0, usedVehiclesCard.pictureVehicles|length - 1) %}
-            {% if usedVehiclesCard.pictureVehicles|length > 0 %}
-                <img src="{{ asset('uploads/imgVehicles/' ~ usedVehiclesCard.pictureVehicles[randomIndex]) }}" class="card-img-top p-1" alt="...">
-            {% else %}
-                <img src="{{ asset('pictures/default-car.png') }}" class="card-img-top p-1" alt="Default Image">
-            {% endif %}
-            <div class="card-body">
-                <a href="{{ path('app_usedVehicle', {id : usedVehiclesCard.id})}}" class="stretched-link"><h5 class="card-title">{{ usedVehiclesCard.brandVehicle }} {{ usedVehiclesCard.model }}</h5></a>
-                <p class="card-text">
-                    <ul class="list-group">
-                        <li class="list-group-item">{{ usedVehiclesCard.price }} €</li>
-                        <li class="list-group-item">{{ usedVehiclesCard.mileage }} km</li>
-                        <li class="list-group-item">{{ usedVehiclesCard.transmissionVehicle }}</li>
-                    </ul>
-                </p>
-            </div>
-        </div>
-    </div>
-{% endfor %}
+		{% endfor %}
 
+		<!-- cards services end -->
+		<!-- cards vehicles start (6 max) -->
+		<div class="row row-col-1 row-col-md-6 g-4">
+			{% for usedVehiclesCard in usedVehiclesCards %}
+				<div class="col d-flex justify-content-center">
+					<div class="card" style="width: 16rem">
+						{% set randomIndex = random(0, usedVehiclesCard.pictureVehicles|length - 1) %}
+						{% if usedVehiclesCard.pictureVehicles|length > 0 %}
+							<img src="{{ asset('uploads/imgVehicles/' ~ usedVehiclesCard.pictureVehicles[randomIndex]) }}" class="card-img-top p-1" alt="...">
+						{% else %}
+							<img src="{{ asset('pictures/default-car.png') }}" class="card-img-top p-1" alt="Default Image">
+						{% endif %}
+						<div class="card-body">
+							<a href="{{ path('app_usedVehicle', {id : usedVehiclesCard.id})}}" class="stretched-link">
+								<h5 class="card-title">
+									{{ usedVehiclesCard.brandVehicle }}
+									{{ usedVehiclesCard.model }}
+								</h5>
+							</a>
+							<p class="card-text">
+								<ul class="list-group">
+									<li class="list-group-item">
+										{{ usedVehiclesCard.price }}
+										€
+									</li>
+									<li class="list-group-item">
+										{{ usedVehiclesCard.mileage }}
+										km
+									</li>
+									<li class="list-group-item">
+										{{ usedVehiclesCard.transmissionVehicle }}
+									</li>
+								</ul>
+							</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+
+		</div>
+		<!-- card vehicles end -->
 	</div>
 	<!-- card vehicles end -->
-</div>
-<!-- card vehicles end -->
 {% endblock %}

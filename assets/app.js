@@ -26,13 +26,6 @@ $(function () {
 });
 
 $(function () {
-  // Activer le menu burger
-  $(".navbar-toggler").on("click", function () {
-    $(".navbar-collapse").toggleClass("show");
-  });
-});
-
-$(function () {
   // Cacher tous les contenus sauf le premier
   $("#tab_info").addClass("active");
   $("#tab_form").removeClass("active");

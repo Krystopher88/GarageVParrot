@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Garage Vincent Parrot
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        {% for service in services %}
+            {% if service.getTypeofservices().getTitle() == 'Mécanique' %}
+                <div class="col-md-12">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        {% if loop.index is even %}
+                            {# Ordre d'affichage pour les cartes d'index pair #}
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="mb-0">
+                                    {{ service.title }}
+                                </h3>
+                                <p class="card-text mb-auto">
+                                    {{ service.description }}
+                                </p>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <img src="{{ asset('uploads/services/' ~ service.imageName) }}" alt="" width="350" height="320" class="img-fluid img-thumbnail">
+                            </div>
+                        {% else %}
+                            {# Ordre d'affichage pour les cartes d'index impair #}
+                            <div class="col-auto d-none d-lg-block">
+                                <img src="{{ asset('uploads/services/' ~ service.imageName) }}" alt="" width="350" height="320" class="img-fluid img-thumbnail">
+                            </div>
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="mb-0">
+                                    {{ service.title }}
+                                </h3>
+                                <p class="mb-auto">
+                                    {{ service.description }}
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
