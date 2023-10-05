@@ -23,7 +23,10 @@
 		{% include "partials/header.html.twig" %}
 	{% endif %}
 
-		{% block body %}{% endblock %}
+		{% block body %}
+		
+		
+		{% endblock %}
 	{% if app.request.attributes.get('_route') != 'app_login' %}
 		{% include "partials/modalContactForm.html.twig" %}
 		{% include "partials/footer.html.twig" %}

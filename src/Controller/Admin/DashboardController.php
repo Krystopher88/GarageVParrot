@@ -39,21 +39,22 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Horaire', 'fas fa-list', OpeningShedule::class);
+        yield MenuItem::section('Administrations');
+        yield MenuItem::linkToCrud('Horaire', 'fa-regular fa-clock', OpeningShedule::class);
+        yield MenuItem::linkToCrud('Employés', 'fas fa-users', User::class);
+        yield MenuItem::section('Vitrine');
         yield MenuItem::linkToCrud('Type de services', 'fas fa-list', TypeOfServices::class);
         yield MenuItem::linkToCrud(('Services'), 'fas fa-list', Services::class);
-        yield MenuItem::section('Ressource Humaines');
-        yield MenuItem::linkToCrud('Employés', 'fas fa-users', User::class);
         yield MenuItem::section('Clientéles');
-        yield MenuItem::linkToCrud('Avis', 'fas fa-users', VisitorReview::class);
-        yield MenuItem::linkToCrud('Messagerie', 'fas fa-users', Messaging::class);
+        yield MenuItem::linkToCrud('Avis', 'fa-solid fa-comment', VisitorReview::class);
+        yield MenuItem::linkToCrud('Messagerie', 'fa-solid fa-envelope', Messaging::class);
         yield MenuItem::section('Véhicules d\'occasion');
-        yield MenuItem::linkToCrud('Véhicules', 'fas fa-list', UsedVehicles::class);
+        yield MenuItem::linkToCrud('Véhicules', 'fa-solid fa-car', UsedVehicles::class);
         yield MenuItem::subMenu('Base de données', 'fas fa-database')
             ->setSubItems([
-                MenuItem::linkToCrud('BrandVehicle', 'fas fa-list', BrandVehicle::class),
+                MenuItem::linkToCrud('Constructeur', 'fas fa-list', BrandVehicle::class),
                 MenuItem::linkToCrud('Carburant', 'fas fa-list', FuelTypeVehicle::class),
-                MenuItem::linkToCrud('Transmission', 'fas fa-list', TransmissionVehicle::class),
+                MenuItem::linkToCrud('Transmissions', 'fas fa-list', TransmissionVehicle::class),
                 MenuItem::linkToCrud('Options', 'fas fa-list', OptionsVehicles::class),
             ]);
 

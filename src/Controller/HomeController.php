@@ -94,15 +94,14 @@ class HomeController extends AbstractController
             $usedVehiclesCards = $usedVehiclesRepository->findAll();
         }
     
-        // Gère le formulaire $formView ici en utilisant le service approprié ou la logique
-        // ...
+        
     
         return $this->render('home/usedvehicles.html.twig', [
             'controller_name' => 'HomeController',
             'formFilterVehicles' => $formFilterVehicles->createView(),
-            'formView' => $formView, // Assurez-vous de gérer $formView correctement ici
+            'formView' => $formView,
             'openingShedules' => $openingSheduleRepository->findAll(),
-            'usedVehiclesCards' => $usedVehiclesCards, // Assurez-vous que le nom de la variable correspond à votre modèle Twig
+            'usedVehiclesCards' => $usedVehiclesCards, 
         ]);
     }
 
