@@ -15,14 +15,14 @@
 			</h1>
 			<p class="lead">
 				Le Garage Vincent Parrot incarne l'excellence dans le monde automobile à Toulouse. 
-								Depuis notre ouverture, nous avons su nous démarquer en tant que référence en matière de services automobiles 
-								de haute qualité. Situé au cœur de la ville, notre garage est devenu un lieu de confiance pour les passionnés 
-								d'automobiles et les conducteurs soucieux de l'entretien de leurs véhicules.
+												Depuis notre ouverture, nous avons su nous démarquer en tant que référence en matière de services automobiles 
+												de haute qualité. Situé au cœur de la ville, notre garage est devenu un lieu de confiance pour les passionnés 
+												d'automobiles et les conducteurs soucieux de l'entretien de leurs véhicules.
 			</p>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-				<button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">
+				<a href="#" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" data-bs-toggle="modal" data-bs-target="#modalContactForm">
 					Contactez-nous
-				</button>
+				</a>
 			</div>
 		</div>
 		<div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
@@ -45,7 +45,7 @@
 								{{ typeOfService.description }}
 							</p>
 							<div class="text-start">
-								<a href="#" class="gap-1 stretched-link btn btn-primary">
+								<a href="{{ path('app_carrosserie') }}" class="gap-1 stretched-link btn btn-primary">
 									En savoir plus
 								</a>
 							</div>
@@ -66,7 +66,7 @@
 								{{ typeOfService.description }}
 							</p>
 							<div class="text-end">
-								<a href="#" class="gap-1 icon-link-hover stretched-link btn btn-primary">
+								<a href="{{ path('app_mecanique') }}" class="gap-1 icon-link-hover stretched-link btn btn-primary">
 									En savoir plus
 								</a>
 							</div>
