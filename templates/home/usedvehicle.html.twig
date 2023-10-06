@@ -104,7 +104,6 @@
 				</div>
 			</div>
 
-			{# formulaire de contact #}
 			<div class="card-body col-md-8 p-2" id="card_body_form">
 				<div class="row d-flex">
 					<div class="col-md-8 mb-4">
@@ -115,42 +114,45 @@
 								</h5>
 							</div>
 							<div class="card-body">
-								<form>
-									<!-- 2 column grid layout with text inputs for the first and last names -->
-									<div class="row mb-4">
-										<div class="col">
-											<div class="form-outline">
-												<input type="text" id="form7Example1" class="form-control"/>
-												<label class="form-label" for="form7Example1">
-													Prénom
-												</label>
-											</div>
-										</div>
-										<div class="col">
-											<div class="form-outline">
-												<input type="text" id="form7Example2" class="form-control"/>
-												<label class="form-label" for="form7Example2">
-													Nom
-												</label>
-											</div>
+								{{ form_start(formViewVehicle) }}
+								<div class="row mb-4">
+									<div class="col">
+										<div class="form-outline">
+											{{ form_label(formViewVehicle.firstName) }}
+											{{ form_widget(formViewVehicle.firstName) }}
 										</div>
 									</div>
-									<!-- Email input -->
-									<div class="form-outline mb-4">
-										<input type="email" id="form7Example5" class="form-control"/>
-										<label class="form-label" for="form7Example5">
-											Email
-										</label>
+									<div class="col">
+										<div class="form-outline">
+											{{ form_label(formViewVehicle.lastName) }}
+											{{ form_widget(formViewVehicle.lastName) }}
+										</div>
 									</div>
+								</div>
+								<!-- Email input -->
+								<div class="form-outline mb-4">
+									{{ form_label(formViewVehicle.email) }}
+									{{ form_widget(formViewVehicle.email) }}
+								</div>
 
-									<!-- Number input -->
-									<div class="form-outline mb-4">
-										<input type="tel" id="form7Example6" class="form-control"/>
-										<label class="form-label" for="form7Example6">
-											Téléphone
-										</label>
-									</div>
-								</form>
+								<!-- Number input -->
+								<div class="form-outline mb-4">
+									{{ form_label(formViewVehicle.phoneNumber) }}
+									{{ form_widget(formViewVehicle.phoneNumber) }}
+								</div>
+
+								<div class="form-outline mb-4">
+									{{ form_label(formViewVehicle.message) }}
+									{{ form_widget(formViewVehicle.message) }}
+								</div>
+								<input type="hidden" name="brandVehicle" value="{{ usedVehicles.brandVehicle }}">
+								<input type="hidden" name="model" value="{{ usedVehicles.model }}">
+								<input type="hidden" name="dateOfCirculation" value="{{ usedVehicles.dateOfCirculation|date('d-m-Y') }}">
+								<input type="hidden" name="price" value="{{ usedVehicles.price }}">
+								<button type="submit" class="btn btn-primary btn-lg btn-block">
+									Envoyer
+								</button>
+								{{ form_end(formViewVehicle) }}
 							</div>
 						</div>
 					</div>
@@ -189,16 +191,12 @@
 										<input type="hidden" name="price" value="{{ usedVehicles.price }}">
 									</li>
 								</ul>
-
-								<button type="button" class="btn btn-primary btn-lg btn-block">
-									Envoyer
-								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			</div>
+
 		</div>
 	</div>
-		{% endblock %}
+{% endblock %}

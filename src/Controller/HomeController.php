@@ -4,12 +4,12 @@ namespace App\Controller;
 
 
 use App\Service\ContactFormService;
+use App\Service\VehicleFormService;
 use App\Form\FilterUsedvehiclesType;
+use App\Repository\ServicesRepository;
 use App\Repository\UsedVehiclesRepository;
 use App\Repository\OpeningSheduleRepository;
-use App\Repository\ServicesRepository;
 use App\Repository\TypeOfServicesRepository;
-use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,13 +18,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     private $contactFormService;
+    private $vehicleFormService;
 
-    public function __construct(ContactFormService $contactFormService)
+    public function __construct(ContactFormService $contactFormService , VehicleFormService $vehicleFormService)
     {
         $this->contactFormService = $contactFormService;
+        $this->vehicleFormService = $vehicleFormService;
     }
 
-    #[Route('/', name: 'app_home', methods: ['GET'])]
+    #[Route('/', name: 'app_home', methods: ['GET', 'POST'])]
     public function index(
         OpeningSheduleRepository $openingSheduleRepository,
         UsedVehiclesRepository $usedVehiclesRepository,
@@ -43,7 +45,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/usedvehicle/{id}', name: 'app_usedVehicle', methods: ['GET'])]
+    #[Route('/usedvehicle/{id}', name: 'app_usedVehicle', methods: ['GET', 'POST'])]
     public function show(
         UsedVehiclesRepository $usedVehiclesRepository, 
         OpeningSheduleRepository $openingSheduleRepository, 
@@ -52,6 +54,7 @@ class HomeController extends AbstractController
     {
 
         $formView = $this->contactFormService->handleContactForm($request);
+        $formViewVehicle = $this->vehicleFormService->handleUsedVehicleForm($request);
 
         $id = $request->attributes->get('id');
         $usedVehicle = $usedVehiclesRepository->findOneBy(['id' => $id]);
@@ -61,14 +64,16 @@ class HomeController extends AbstractController
         return $this->render('home/usedvehicle.html.twig', [
             'controller_name' => 'HomeController',
             'formView' => $formView,
+            'formViewVehicle' => $formViewVehicle,
             'openingShedules' => $openingSheduleRepository->findAll(),
             'usedVehicles' => $usedVehicle,
             'picturesVehicles' => $picturesVehicles,
             'optionsVehicles' => $optionsVehicles,
         ]);
+        
     }
 
-    #[Route('/usedvehicles', name: 'app_usedVehicles', methods: ['GET'])]
+    #[Route('/usedvehicles', name: 'app_usedVehicles', methods: ['GET', 'POST'])]
     public function showAllVehicles(
         UsedVehiclesRepository $usedVehiclesRepository, 
         OpeningSheduleRepository $openingSheduleRepository, 
@@ -105,7 +110,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/mecanique', name: 'app_mecanique', methods: ['GET'])]
+    #[Route('/mecanique', name: 'app_mecanique', methods: ['GET', 'POST'])]
     public function mecanique(
         OpeningSheduleRepository $openingSheduleRepository,
         ServicesRepository $servicesRepository,
@@ -122,7 +127,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/carrosserie', name: 'app_carrosserie', methods: ['GET'])]
+    #[Route('/carrosserie', name: 'app_carrosserie', methods: ['GET', 'POST'])]
     public function carrosserie(
         OpeningSheduleRepository $openingSheduleRepository,
         ServicesRepository $servicesRepository,
