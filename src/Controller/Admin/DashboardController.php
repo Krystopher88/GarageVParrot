@@ -12,8 +12,9 @@ use App\Entity\OpeningShedule;
 use App\Entity\TypeOfServices;
 use App\Entity\FuelTypeVehicle;
 use App\Entity\OptionsVehicles;
-use App\Entity\PictureVehicles;
 use App\Entity\TransmissionVehicle;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -33,7 +34,14 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Garage Vincent Parrot');
+            ->setTitle('Garage Vincent Parrot')
+            ->setFaviconPath('pictures/logo_header.png');
+    }
+
+    public function configureCrud(): Crud
+    {
+        return parent::configureCrud()
+            ->showEntityActionsInlined();
     }
 
     public function configureMenuItems(): iterable
