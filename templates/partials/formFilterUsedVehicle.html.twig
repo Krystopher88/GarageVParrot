@@ -1,7 +1,44 @@
 <div class="sticky-top">
-    {{ form_start(formFilterVehicles) }}
-    {{ form_widget(formFilterVehicles) }}
-    <button type="submit" class="btn btn-primary">Rechercher</button>
-    <a href="{{ path('app_usedVehicles') }}" class="btn btn-secondary">Réinitialiser</a>
-    {{ form_end(formFilterVehicles) }}
+	{{ form_start(formFilterVehicles) }}
+	<div class="mb-3">
+		{{ form_row(formFilterVehicles.brandVehicle) }}
+		{{ form_row(formFilterVehicles.fuelTypeVehicle) }}
+		{{ form_row(formFilterVehicles.transmissionVehicle) }}
+	</div>
+	<div>
+		<div class="row">
+			<div class="col-md-6">
+				{{ form_row(formFilterVehicles.minPrice, {'id': 'minPrice', 'attr': {'class': 'hidden-input'}}
+				) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_row(formFilterVehicles.maxPrice, {'id': 'maxPrice', 'attr': {'class': 'hidden-input'}}
+				) }}
+			</div>
+		</div>
+		<div id="price-slider" class="mb-3"></div>
+		<div id="price-values"></div>
+	</div>
+
+    <div>
+		<div class="row">
+			<div class="col-md-6">
+				{{ form_row(formFilterVehicles.minMileage, {'id': 'minMileage', 'attr': {'class': 'hidden-input'}}
+				) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_row(formFilterVehicles.maxMileage, {'id': 'maxMileage', 'attr': {'class': 'hidden-input'}}
+				) }}
+			</div>
+		</div>
+		<div id="mileAge-slider" class="mb-3"></div>
+		<div id="mileAge-values"></div>
+	</div>
+	<button type="submit" class="btn btn-primary">
+		Rechercher
+	</button>
+	<a href="{{ path('app_usedVehicles') }}" class="btn btn-secondary">
+		Réinitialiser
+	</a>
+	{{ form_end(formFilterVehicles) }}
 </div>

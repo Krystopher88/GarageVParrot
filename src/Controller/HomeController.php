@@ -20,7 +20,7 @@ class HomeController extends AbstractController
     private $contactFormService;
     private $vehicleFormService;
 
-    public function __construct(ContactFormService $contactFormService , VehicleFormService $vehicleFormService)
+    public function __construct(ContactFormService $contactFormService, VehicleFormService $vehicleFormService)
     {
         $this->contactFormService = $contactFormService;
         $this->vehicleFormService = $vehicleFormService;
@@ -32,8 +32,7 @@ class HomeController extends AbstractController
         UsedVehiclesRepository $usedVehiclesRepository,
         TypeOfServicesRepository $typeOfServicesRepository,
         Request $request,
-        ): Response
-    {
+    ): Response {
         $formView = $this->contactFormService->handleContactForm($request);
 
         return $this->render('home/index.html.twig', [
@@ -47,11 +46,10 @@ class HomeController extends AbstractController
 
     #[Route('/usedvehicle/{id}', name: 'app_usedVehicle', methods: ['GET', 'POST'])]
     public function show(
-        UsedVehiclesRepository $usedVehiclesRepository, 
-        OpeningSheduleRepository $openingSheduleRepository, 
+        UsedVehiclesRepository $usedVehiclesRepository,
+        OpeningSheduleRepository $openingSheduleRepository,
         Request $request
-        ): Response
-    {
+    ): Response {
 
         $formView = $this->contactFormService->handleContactForm($request);
         $formViewVehicle = $this->vehicleFormService->handleUsedVehicleForm($request);
@@ -70,53 +68,50 @@ class HomeController extends AbstractController
             'picturesVehicles' => $picturesVehicles,
             'optionsVehicles' => $optionsVehicles,
         ]);
-        
     }
 
     #[Route('/usedvehicles', name: 'app_usedVehicles', methods: ['GET', 'POST'])]
     public function showAllVehicles(
-        UsedVehiclesRepository $usedVehiclesRepository, 
-        OpeningSheduleRepository $openingSheduleRepository, 
+        UsedVehiclesRepository $usedVehiclesRepository,
+        OpeningSheduleRepository $openingSheduleRepository,
         Request $request
-    ): Response
-    {
+    ): Response {
         $formView = $this->contactFormService->handleContactForm($request);
-
-        // Crée le formulaire de recherche
+    
         $formFilterVehicles = $this->createForm(FilterUsedvehiclesType::class);
         $formFilterVehicles->handleRequest($request);
     
-        if ($formFilterVehicles->isSubmitted() && $formFilterVehicles->isValid()) {
-            // Récupère les données du formulaire en utilisant les noms des champs comme clés
-            $searchData['brandVehicle'] = $formFilterVehicles->get('brandVehicle')->getData();
-            $searchData['fuelTypeVehicle'] = $formFilterVehicles->get('fuelTypeVehicle')->getData();
-            $searchData['transmissionVehicle'] = $formFilterVehicles->get('transmissionVehicle')->getData();
+        $searchData = [
+            'brandVehicle' => $formFilterVehicles->get('brandVehicle')->getData(),
+            'fuelTypeVehicle' => $formFilterVehicles->get('fuelTypeVehicle')->getData(),
+            'transmissionVehicle' => $formFilterVehicles->get('transmissionVehicle')->getData(),
+        ];
     
-            // Utilise la méthode de recherche personnalisée du repository pour filtrer les véhicules
-            $usedVehiclesCards = $usedVehiclesRepository->findSearchVehicles($searchData);
-        } else {
-            // Si le formulaire n'a pas été soumis ou si aucun critère de recherche n'a été sélectionné, affiche tous les véhicules
-            $usedVehiclesCards = $usedVehiclesRepository->findAll();
-        }
+        $minPrice = $formFilterVehicles->get('minPrice')->getData();
+        $maxPrice = $formFilterVehicles->get('maxPrice')->getData();
+        $minMileage = $formFilterVehicles->get('minMileage')->getData();
+        $maxMileage = $formFilterVehicles->get('maxMileage')->getData();
     
-        
+        // Effectuez la recherche en utilisant les valeurs minPrice et maxPrice
+        $usedVehiclesCards = $usedVehiclesRepository->findSearchVehicles($searchData, $minPrice, $maxPrice, $minMileage, $maxMileage);
     
         return $this->render('home/usedvehicles.html.twig', [
             'controller_name' => 'HomeController',
             'formFilterVehicles' => $formFilterVehicles->createView(),
             'formView' => $formView,
             'openingShedules' => $openingSheduleRepository->findAll(),
-            'usedVehiclesCards' => $usedVehiclesCards, 
+            'usedVehiclesCards' => $usedVehiclesCards,
         ]);
     }
+    
+    
 
     #[Route('/mecanique', name: 'app_mecanique', methods: ['GET', 'POST'])]
     public function mecanique(
         OpeningSheduleRepository $openingSheduleRepository,
         ServicesRepository $servicesRepository,
         Request $request
-        ): Response
-    {
+    ): Response {
         $formView = $this->contactFormService->handleContactForm($request);
 
         return $this->render('home/mecanique.html.twig', [
@@ -132,8 +127,7 @@ class HomeController extends AbstractController
         OpeningSheduleRepository $openingSheduleRepository,
         ServicesRepository $servicesRepository,
         Request $request
-        ): Response
-    {
+    ): Response {
         $formView = $this->contactFormService->handleContactForm($request);
 
         return $this->render('home/carrosserie.html.twig', [

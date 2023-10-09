@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\UsedVehicles;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,6 +25,29 @@ class FilterUsedvehiclesType extends AbstractType
                 'label' => 'Transmission',
                 'placeholder' => 'Choissisez une transmission',
             ])
+            ->add('minPrice', MoneyType::class, [
+                'label' => 'Prix minimum',
+                'currency' => 'EUR',
+                'required' => false,
+                'mapped' => false,
+            ])
+            ->add('maxPrice', MoneyType::class, [
+                'label' => 'Prix maximum',
+                'currency' => 'EUR',
+                'required' => false,
+                'mapped' => false,
+            ])
+            ->add('minMileage', null, [
+                'label' => 'Kilométrage minimum',
+                'required' => false,
+                'mapped' => false,
+            ])
+            ->add('maxMileage', null, [
+                'label' => 'Kilométrage maximun',
+                'required' => false,
+                'mapped' => false,
+            ])
+
         ;
     }
 

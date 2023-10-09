@@ -1,4 +1,6 @@
 @import "custom";
 @import "~bootstrap/scss/bootstrap";
 
-
+.ui-slider-handle{
+  border-radius: 50%;
+}
