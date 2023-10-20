@@ -16,14 +16,17 @@ class FilterUsedvehiclesType extends AbstractType
             ->add('brandVehicle', null, [
                 'label' => 'Marque',
                 'placeholder' => 'Choissisez une marque',
+                'data_class' => null,
             ])
             ->add('fuelTypeVehicle', null, [
                 'label' => 'Carburant',
                 'placeholder' => 'Choissisez un type de carburant',
+                'data_class' => null,
             ])
             ->add('transmissionVehicle' , null, [
                 'label' => 'Transmission',
                 'placeholder' => 'Choissisez une transmission',
+                'data_class' => null,
             ])
             ->add('minPrice', MoneyType::class, [
                 'label' => 'Prix minimum',

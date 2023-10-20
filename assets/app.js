@@ -93,3 +93,53 @@ $(function () {
     },
   });
 });
+
+
+$(function () {
+  $('#filter_form').on('submit', function(e) {
+      e.preventDefault();
+      let searchUrl = $(this).data('search-url');
+
+      $.ajax({
+          type: 'GET',
+          url: searchUrl,
+          data: $(this).serialize(), 
+          success: function(response) {
+              $('#results-section').html(response);
+              console.log(searchUrl);
+          },
+          error: function() {
+              alert('Une erreur s\'est produite.');
+          }
+      });
+  });
+});
+
+$(function () {
+  $('#reset-button').on('click', function(event) {
+      event.preventDefault(); // Empêche la navigation par défaut
+      let searchUrl = $(this).data('search-url');
+
+      // Effectuez une requête AJAX vers la route qui retourne tous les véhicules
+      $.ajax({
+          type: 'GET',
+          url: searchUrl, // Assurez-vous que cette route retourne les véhicules sans filtres
+          success: function(response) {
+              // Mettez à jour la section des annonces avec les résultats de la réponse
+              $('#results-section').html(response);
+          },
+          error: function() {
+              alert('Une erreur s\'est produite.');
+          }
+      });
+  });
+});
+
+$(function () {
+  $('#reset-button').on('click', function(event) {
+      event.preventDefault(); // Empêche la navigation par défaut
+
+      // Réinitialisez les valeurs du formulaire à leurs valeurs par défaut
+      $('#filter_form')[0].reset(); // Réinitialisez le formulaire aux valeurs par défaut
+  });
+});

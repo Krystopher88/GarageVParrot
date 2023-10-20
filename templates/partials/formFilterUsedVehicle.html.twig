@@ -1,5 +1,5 @@
 <div class="sticky-top">
-	{{ form_start(formFilterVehicles) }}
+	{{ form_start(formFilterVehicles, {'attr': {'id': 'filter_form', 'data-search-url': path('app_usedVehicles')}}) }}
 	<div class="mb-3">
 		{{ form_row(formFilterVehicles.brandVehicle) }}
 		{{ form_row(formFilterVehicles.fuelTypeVehicle) }}
@@ -37,7 +37,7 @@
 	<button type="submit" class="btn btn-primary">
 		Rechercher
 	</button>
-	<a href="{{ path('app_usedVehicles') }}" class="btn btn-secondary">
+	<a href="{{ path('app_usedVehicles') }}" class="btn btn-secondary" id="reset-button">
 		Réinitialiser
 	</a>
 	{{ form_end(formFilterVehicles) }}

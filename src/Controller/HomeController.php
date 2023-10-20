@@ -13,6 +13,7 @@ use App\Repository\TypeOfServicesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -77,23 +78,30 @@ class HomeController extends AbstractController
         Request $request
     ): Response {
         $formView = $this->contactFormService->handleContactForm($request);
-    
+        
         $formFilterVehicles = $this->createForm(FilterUsedvehiclesType::class);
         $formFilterVehicles->handleRequest($request);
-    
+        
         $searchData = [
             'brandVehicle' => $formFilterVehicles->get('brandVehicle')->getData(),
             'fuelTypeVehicle' => $formFilterVehicles->get('fuelTypeVehicle')->getData(),
             'transmissionVehicle' => $formFilterVehicles->get('transmissionVehicle')->getData(),
         ];
-    
+        
         $minPrice = $formFilterVehicles->get('minPrice')->getData();
         $maxPrice = $formFilterVehicles->get('maxPrice')->getData();
         $minMileage = $formFilterVehicles->get('minMileage')->getData();
         $maxMileage = $formFilterVehicles->get('maxMileage')->getData();
-    
-        // Effectuez la recherche en utilisant les valeurs minPrice et maxPrice
+        
         $usedVehiclesCards = $usedVehiclesRepository->findSearchVehicles($searchData, $minPrice, $maxPrice, $minMileage, $maxMileage);
+    
+        if ($request->isXmlHttpRequest()) {
+            $html = $this->renderView('home/results.html.twig', [
+                'usedVehiclesCards' => $usedVehiclesCards,
+            ]);
+    
+            return new Response($html);
+        }
     
         return $this->render('home/usedvehicles.html.twig', [
             'controller_name' => 'HomeController',
