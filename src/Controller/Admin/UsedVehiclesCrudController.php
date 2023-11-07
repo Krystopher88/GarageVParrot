@@ -26,7 +26,8 @@ class UsedVehiclesCrudController extends AbstractCrudController
     {
         return $crud
             ->setPageTitle(Crud::PAGE_INDEX, 'Véhicule d\'occasion')
-            ->setPageTitle(Crud::PAGE_EDIT, 'Message');
+            ->setPageTitle(Crud::PAGE_NEW, 'Créer une annonce')
+            ->setPageTitle(Crud::PAGE_EDIT, 'Modifier un véhicule');
     }
 
 

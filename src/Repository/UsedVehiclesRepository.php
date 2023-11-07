@@ -33,43 +33,43 @@ class UsedVehiclesRepository extends ServiceEntityRepository
 /**
  * @return UsedVehicles[]
  */
-public function findSearchVehicles(array $search, $minPrice, $maxPrice, $minMileage, $maxMileage): array
-{
-    $queryBuilder = $this->createQueryBuilder('u');
+    public function findSearchVehicles(array $search, $minPrice, $maxPrice, $minMileage, $maxMileage): array
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
 
-    if ($search['brandVehicle'] !== null) {
-        $queryBuilder
-            ->andWhere('u.brandVehicle = :brandVehicle')
-            ->setParameter('brandVehicle', $search['brandVehicle']);
-    }
-    if ($search['fuelTypeVehicle'] !== null) {
-        $queryBuilder
-            ->andWhere('u.fuelTypeVehicle = :fuelTypeVehicle')
-            ->setParameter('fuelTypeVehicle', $search['fuelTypeVehicle']);
-    }
-    if ($search['transmissionVehicle'] !== null) {
-        $queryBuilder
-            ->andWhere('u.transmissionVehicle = :transmissionVehicle')
-            ->setParameter('transmissionVehicle', $search['transmissionVehicle']);
-    }
+        if ($search['brandVehicle'] !== null) {
+            $queryBuilder
+                ->andWhere('u.brandVehicle = :brandVehicle')
+                ->setParameter('brandVehicle', $search['brandVehicle']);
+        }
+        if ($search['fuelTypeVehicle'] !== null) {
+            $queryBuilder
+                ->andWhere('u.fuelTypeVehicle = :fuelTypeVehicle')
+                ->setParameter('fuelTypeVehicle', $search['fuelTypeVehicle']);
+        }
+        if ($search['transmissionVehicle'] !== null) {
+            $queryBuilder
+                ->andWhere('u.transmissionVehicle = :transmissionVehicle')
+                ->setParameter('transmissionVehicle', $search['transmissionVehicle']);
+        }
 
-    if ($minPrice !== null && $maxPrice !== null) {
-        $queryBuilder
-            ->andWhere('u.price >= :minPrice')
-            ->andWhere('u.price <= :maxPrice')
-            ->setParameter('minPrice', $minPrice)
-            ->setParameter('maxPrice', $maxPrice);
-    }
+        if ($minPrice !== null && $maxPrice !== null) {
+            $queryBuilder
+                ->andWhere('u.price >= :minPrice')
+                ->andWhere('u.price <= :maxPrice')
+                ->setParameter('minPrice', $minPrice)
+                ->setParameter('maxPrice', $maxPrice);
+        }
 
-    if ($minMileage !== null && $maxMileage !== null) {
-        $queryBuilder
-            ->andWhere('u.mileage >= :minMileage')
-            ->andWhere('u.mileage <= :maxMileage')
-            ->setParameter('minMileage', $minMileage)
-            ->setParameter('maxMileage', $maxMileage);
-    }
+        if ($minMileage !== null && $maxMileage !== null) {
+            $queryBuilder
+                ->andWhere('u.mileage >= :minMileage')
+                ->andWhere('u.mileage <= :maxMileage')
+                ->setParameter('minMileage', $minMileage)
+                ->setParameter('maxMileage', $maxMileage);
+        }
 
-    return $queryBuilder->getQuery()->getResult();
-}
+        return $queryBuilder->getQuery()->getResult();
+    }
 
 }

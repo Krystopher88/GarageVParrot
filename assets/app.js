@@ -117,15 +117,14 @@ $(function () {
 
 $(function () {
   $('#reset-button').on('click', function(event) {
-      event.preventDefault(); // Empêche la navigation par défaut
+      event.preventDefault();
       let searchUrl = $(this).data('search-url');
 
-      // Effectuez une requête AJAX vers la route qui retourne tous les véhicules
       $.ajax({
           type: 'GET',
-          url: searchUrl, // Assurez-vous que cette route retourne les véhicules sans filtres
+          url: searchUrl, 
           success: function(response) {
-              // Mettez à jour la section des annonces avec les résultats de la réponse
+              
               $('#results-section').html(response);
           },
           error: function() {
@@ -135,11 +134,10 @@ $(function () {
   });
 });
 
-$(function () {
-  $('#reset-button').on('click', function(event) {
-      event.preventDefault(); // Empêche la navigation par défaut
+// $(function () {
+//   $('#reset-button').on('click', function(event) {
+//       event.preventDefault(); 
 
-      // Réinitialisez les valeurs du formulaire à leurs valeurs par défaut
-      $('#filter_form')[0].reset(); // Réinitialisez le formulaire aux valeurs par défaut
-  });
-});
+//       $('#filter_form')[0].reset(); 
+//   });
+// });
